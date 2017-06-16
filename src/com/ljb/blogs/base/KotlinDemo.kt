@@ -10,17 +10,17 @@ import com.ljb.blogs.base.point.Point
 
 fun main(args: Array<String>) {
 
-//    testChar()
-//
-//    textLXTD()
+    testChar()
 
-//    testZX()
+    textLXTD()
 
-//    testGJDZX()
+    testZX()
 
-//    testOperation()
+    testGJDZX()
 
-//    testPoint()
+    testOperation()
+
+    testPoint()
 
     testString()
 
