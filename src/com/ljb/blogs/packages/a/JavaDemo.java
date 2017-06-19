@@ -7,7 +7,7 @@ import com.ljb.blogs.packages.c.Person;
  * Package Java测试类
  * Created by L on 2017/6/15.
  */
-public class PackageJava {
+public class JavaDemo {
 
     public static void main(String[] args){
 
