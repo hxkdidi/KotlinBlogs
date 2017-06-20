@@ -1,5 +1,9 @@
 package com.ljb.blogs.funs
 
+import com.ljb.blogs.funs.ext.Person
+import com.ljb.blogs.funs.ext.SuperMan
+import com.ljb.blogs.funs.other.ButtonK
+import com.ljb.blogs.funs.other.Result
 import java.math.BigInteger
 
 /**
@@ -23,9 +27,12 @@ fun main(arrgs: Array<String>) {
     println(outFun())
 
     //扩展函数
-    val num :Int = 10
+    val num: Int = 10
     //调用我们自定义的扩展函数
     println(num.add(1))
+
+    //进一步探讨扩展函数
+    extFun()
 
     //递归函数（阶乘数过大，依旧栈内存移除）
     println(factorial1(10))
@@ -56,47 +63,45 @@ fun main(arrgs: Array<String>) {
 
 }
 
-    /**
-     * 默认参数
-     * */
+/**
+ * 默认参数
+ * */
+fun add(n1: Int = 0, n2: Int = 0, n3: Int = 0): Int {
+    return n1 + n2 + n3
+}
 
-    fun add(n1: Int = 0, n2: Int = 0, n3: Int = 0): Int {
-        return n1 + n2 + n3
+/**
+ * 可变参数
+ * */
+fun addMore(vararg arr: Int): Int {
+    var result = 0
+    for (num in arr) {
+        result += num
+    }
+    return result
+}
+
+/**
+ * 单表达式函数
+ * */
+
+fun add2(n1: Int = 0, n2: Int = 0, n3: Int = 0) = n1 + n2 + n3
+
+
+/**
+ *局部函数（闭包函数）
+ * */
+
+fun outFun(): Int {
+    var n = 1
+
+    fun inFun(): Int {
+        n += 1
+        return n
     }
 
-    /**
-     * 可变参数
-     * */
-
-    fun addMore(vararg arr: Int): Int {
-        var result = 0
-        for (num in arr) {
-            result += num
-        }
-        return result
-    }
-
-    /**
-     * 单表达式函数
-     * */
-
-    fun add2(n1: Int = 0, n2: Int = 0, n3: Int = 0) = n1 + n2 + n3
-
-
-    /**
-     *局部函数（闭包函数）
-     * */
-
-    fun outFun(): Int {
-        var n = 1
-
-        fun inFun(): Int {
-            n += 1
-            return n
-        }
-
-        return inFun()
-    }
+    return inFun()
+}
 
 /*
 fun tell(str: String): Unit {
@@ -116,29 +121,66 @@ fun Int.add(num: Int): Int {
     return this.plus(num)
 }
 
+/**
+ * 扩展函数进一步探讨
+ * */
+fun extFun() {
+    val per = Person("A")
+    val superMan = SuperMan("B")
 
-    /**
-     * 递归函数
-     * */
+    per.tell()      //输出 ： person:A
+    superMan.tell()  //输出： superman:B
 
-    fun factorial1(num: Int): Long {
-        if (num == 1 || num == 0) {
-            return 1
-        } else {
-            return num * factorial1(num - 1)
-        }
+    say(per)        //输出：person:A
+    say(superMan)   //输出：person:A
+
+    //尝试调用被扩展覆写的方法
+    println(per.getName())  //依旧输出：A
+}
+
+
+fun say(per: Person) {
+    per.tell()
+}
+
+//Person类扩展tell
+fun Person.tell() {
+    println("person:" + name)
+}
+
+//SuperMan类扩展方法
+fun SuperMan.tell() {
+    println("superman:" + name)
+}
+
+//尝试通过扩展方法覆写Person的getName()
+fun Person.getName(): String {
+    return "------ $name"
+}
+
+
+/**
+ * 递归函数
+ * */
+
+fun factorial1(num: Int): Long {
+    if (num == 1 || num == 0) {
+        return 1
+    } else {
+        return num * factorial1(num - 1)
     }
+}
 
 
-    /**
-     * 伪递归其实编译器在编译后会将其改为遍历的方式实现
-     */
-    tailrec fun factorial2(num: Int, end: Result) {
-        if (num == 1 || num == 0) {
-            return
-        } else {
-            end.value *= BigInteger.valueOf(num.toLong())
-            factorial2(num - 1, end)
-        }
+/**
+ * 伪递归其实编译器在编译后会将其改为遍历的方式实现
+ */
+tailrec fun factorial2(num: Int, end: Result) {
+    if (num == 1 || num == 0) {
+        return
+    } else {
+        end.value *= BigInteger.valueOf(num.toLong())
+        factorial2(num - 1, end)
     }
+}
 

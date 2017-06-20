@@ -44,8 +44,8 @@ Kotlin 中可以在文件顶级声明函数，这就意味者你不用像在Java
 
 我们可以直接这样调用代码
 
- 	println(add(1, 2))
-    println(add(1, 2, 3))
+ 	println(add(1, 2))  	//输出：3
+    println(add(1, 2, 3))	//输出：6
 
 不用像Java那样重写个方法，给某个参数传个默认值或者null了。
 
@@ -122,7 +122,7 @@ Kotlin中提供了命名参数的形式，来传递指定的参数
 
 ### 3、局部函数
 
-Kotlin支持函数中定义函数
+Kotlin支持函数中定义函数，内部函数可以访问外部函数的变量。
 
 	fun outFun(): Int {
 	    var n = 1
@@ -172,6 +172,95 @@ Kotlin支持函数中定义函数
     println(num.add(1))
 
 
+进一步探讨，难道我们真的为Int类添加了一个函数？
+
+显然是不可能的，扩展函数只是Kotlin给出的一种给某个类增加功能时新的实现思路，开发人员不必再像Java一样去创建子类或者装饰类了。那它跟真正的类成员函数有什么区别吗?
+
+我们还是通过例子探讨这个问题：我们创建Java的Person类和它的子类SuperMan来对比（是的，Kotlin语法支持直接对Java类扩展）
+
+	//Java代码
+	public class Person {
+	
+	    private String name;
+	
+	    public Person(String name) {
+	        this.name = name;
+	    }
+	
+	    public String getName() {
+	        return name;
+	    }
+	
+	    public void setName(String name) {
+	        this.name = name;
+	    }
+	}
+
+	---------------------------------------------
+
+	public class SuperMan extends Person {
+
+	    public SuperMan(String name) {
+	        super(name);
+	    }
+	}
+
+我们尝试给Person和SuperMan类，分别扩展个tell()函数，打印自己的名字
+	
+	//Kotlin代码进行扩展
+
+	//Person类扩展tell
+	fun Person.tell() {
+	    println("person:" + name)
+	}
+	
+	//SuperMan类扩展方法
+	fun SuperMan.tell(){
+	    println("superman:" + name)
+	}
+
+分别创建Person对象和SuperMan对象，调用该函数是没有任何问题的。
+
+	val per = Person("A")
+    val superMan = SuperMan("B")
+
+    per.tell()      //输出 ： person:A
+    superMan.tell()  //输出： superman:B
+
+到现在一切都是正常的，假设我们有以下函数：
+	
+	fun say(per: Person) {
+	    per.tell()
+	}
+
+通过say()方法我们调用tell()方法，由于SuperMan是Person的子类，所以也可以传递，我们再看看结果：
+
+ 	say(per)        //输出：person:A
+    say(superMan)   //输出：person:A
+
+既然都调用了Person的扩展tell()，我们明明传递的是子类对象啊，所以从这里看出来扩展函数实际并没有真正的给类添加一个成员函数，只是一套机制罢了。
+
+**Kotlin中扩展函数是直接被静态解析的。**
+
+也就是说扩展函数在编译时期，传递的的参数类型就已经固定不能改变，它不像继承关系里的成员函数在程序运行时期还会推到出你到底是子类对象还是父类对象。
+
+**还有，扩展函数只能添加功能，不能覆写功能。**
+
+如果Peron类中已有getName()，我们对它进行扩展是不行了。
+
+	//尝试通过扩展方法覆写Person的getName()
+	fun Person.getName():String{
+	    return "------ $name"
+	}
+
+虽然Kotlin语法不会报错，但是当我们调用getName()时，是不会有任何变化的
+
+	//尝试调用被扩展覆写的方法
+    println(per.getName())  //依旧输出：A
+
+以上2点，就是扩展函数与实际成员函数的区别。
+
+
 ### 7、尾递归函数
 
 >什么是伪递归？
@@ -195,7 +284,7 @@ Java中递归如何求阶乘？
 	        }
 	 }
 
-上面这个方法看似是没有问题的，并且我们输入一个较小的数，阶乘也是完全能算出来的，但当我们计算10000(或者更大)的数的阶乘，Java抛出了栈溢出异常：
+上面这个方法看似是没有问题的，并且我们输入一个较小的数，阶乘也是完全能算出来的，但当我们计算10000(或者更大)的数的阶乘，Java抛出了StackOverError(栈内存溢出)：
 
 ![](http://i.imgur.com/EiegilU.png)
 
@@ -210,7 +299,7 @@ Kotlin中呢？会有同样的问题吗？
 	    }
 	}
 
-改好后，继续求10000的阶乘，发现Kotlin中同Java一样抛出来栈溢出异常
+改好后，继续求10000的阶乘，发现Kotlin中同Java一样抛出来栈溢出StackOverError
 
 ![](http://i.imgur.com/FCc1S3y.png)
 
@@ -225,7 +314,7 @@ tailrec关键字使用要求：
 * 1、tailrec关键字修饰递归方法
 * 2、递归函数内部调用自身之后，不能再有代码或者运算（上面的代码不满足这一条）
 
-显然第一条很容易满足，但第二条之前的代码在调用自身后还有乘法运算和返回数据这两步，显然是不满足条件的，我们尝试多加一个参数，通过该参数的引用来获取返回值。
+显然第一条很容易满足，但第二条之前的代码在调用自身后还有乘法运算和返回数据这两步，是不满足条件的，我们尝试多加一个参数，通过该参数的引用来获取返回值。
 
 最终修改后的代码：
 
@@ -243,7 +332,6 @@ tailrec关键字使用要求：
 
 	/**
 	 * 该类用于接收最后伪递归返回的结果
-	 * Created by L on 2017/6/19.
 	 */
 	class Result(var value: BigInteger = BigInteger.valueOf(1L))
 
@@ -337,14 +425,14 @@ Kotlin版：
 
 通过上面的比对代码，想必大家对Kotlin中高阶函数有个基本认识了吧。
 
-注：Kotlin中如果参数只有一个参数，并且它是一个方法，那么可以直接写成下面这种形式：
+注：Kotlin中如果参数只有一个，并且它是一个函数，那么可以直接写成下面这种形式：
 
 	//省略写法
     buttonK.downClick{
         println("Kotlin按钮被点击2")
     }
 
-那如果多个参数中有一个方法，又该怎么写？（假设点击事件需要个额外参数）
+那如果多个参数中有一个函数，又该怎么写？（假设点击事件需要个额外参数）
 
 
 	/**
@@ -356,14 +444,14 @@ Kotlin版：
         println("---end---")
     }
 
-也就是说，你只需要把传递的方法定义为最后一个参数即可，调用如下:
+也就是说，你只需要把传递的函数定义为最后一个参数即可，调用如下:
    
 	//增加额外参数
     buttonK.downClick(666, fun(arg: Int) {
         println("这是你传入的参数：$arg")
     })
 
-总觉的这个fun关键字比较碍眼，内否简写？
+总觉的这个fun关键字比较碍眼，能否简写？
 
 当然是可以的，简化后：
 
@@ -371,11 +459,11 @@ Kotlin版：
 
 是不是很神奇？我们直接把fun和参数定义一起干掉了，编译器既然没报错，那么这是为什么？
 
-因为我们在不经意间写了个Lambda表达式（{...}大括号里就是lambda表达式，it是Kotlin中为了开发人员访问方法参数而设置的默认的形参名，也就是我们实际传入的参数）
+其实，我们在不经意间写了个Lambda表达式（{...}大括号里就是lambda表达式，it是Kotlin中为了开发人员访问参数而设置的默认的形参名，也就是我们实际传入的参数）
 
 
 ## Lambda表达式
 
 >什么是Lamdba表达式？
 
-其实Lambda表达式就是函数，并且我们都已经证明过了，不是吗？
+其实Lambda表达式就是函数，并且我们在上面的代码中已经证明过了，不是吗？

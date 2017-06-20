@@ -1,4 +1,4 @@
-package com.ljb.blogs.funs
+package com.ljb.blogs.funs.other
 
 /**
  * Created by L on 2017/6/16.
