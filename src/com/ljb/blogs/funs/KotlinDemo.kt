@@ -1,7 +1,7 @@
 package com.ljb.blogs.funs
 
-import com.ljb.blogs.funs.ext.Person
-import com.ljb.blogs.funs.ext.SuperMan
+import com.ljb.blogs.funs.extfun.Person
+import com.ljb.blogs.funs.extfun.SuperMan
 import com.ljb.blogs.funs.other.ButtonK
 import com.ljb.blogs.funs.other.Result
 import java.math.BigInteger
