@@ -47,7 +47,8 @@ fun main(args: Array<String>) {
 
 
     //数据类
-    Data("哈哈").tell()
+    val data = Data("数据1", "数据2")
+    println(data) //已经帮我们实现了toString()
 
 
 }
