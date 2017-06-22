@@ -7,7 +7,7 @@
 
 [Kotlin-Android世界的一股清流-Package](./blogs/Kotlin-Android世界的一股清流-Package.md)
 
-[Kotlin-Android世界的一股清流-基本数据类型与运算符](./blogs/Kotlin-Android世界的一股清流-基本数据类型与运算符.md)
+[Kotlin-Android世界的一股清流-基本类型与运算符](./blogs/Kotlin-Android世界的一股清流-基本类型与运算符.md)
 
 [Kotlin-Android世界的一股清流-流程控制](./blogs/Kotlin-Android世界的一股清流-流程控制.md)
 
