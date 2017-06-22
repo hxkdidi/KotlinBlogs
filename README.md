@@ -16,3 +16,5 @@
 [Kotlin-Android世界的一股清流-函数](http://blog.csdn.net/qq1026291832/article/details/73472554)
 
 [Kotlin-Android世界的一股清流-Lambda表达式](http://blog.csdn.net/qq1026291832/article/details/73511138)
+
+[Kotlin-Android世界的一股清流-Class类](http://blog.csdn.net/qq1026291832/article/details/73608884)
