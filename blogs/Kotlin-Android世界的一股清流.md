@@ -18,3 +18,5 @@
 [Kotlin-Android世界的一股清流-Lambda表达式](http://blog.csdn.net/qq1026291832/article/details/73511138)
 
 [Kotlin-Android世界的一股清流-Class类](http://blog.csdn.net/qq1026291832/article/details/73608884)
+
+[Kotlin-Android世界的一股清流-委托](http://blog.csdn.net/qq1026291832/article/details/73851105)

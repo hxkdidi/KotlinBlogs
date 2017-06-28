@@ -16,3 +16,5 @@
 [Kotlin-Android世界的一股清流-Lambda表达式](./blogs/Kotlin-Android世界的一股清流-Lambda表达式.md)
 
 [Kotlin-Android世界的一股清流-Class类](./blogs/Kotlin-Android世界的一股清流-Class类.md)
+
+[Kotlin-Android世界的一股清流-委托](./blogs/Kotlin-Android世界的一股清流-委托.md)
