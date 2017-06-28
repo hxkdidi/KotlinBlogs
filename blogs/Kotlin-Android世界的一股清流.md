@@ -7,16 +7,16 @@
 
 ## 更新进度...
 
-[Kotlin-Android世界的一股清流-Package](http://blog.csdn.net/qq1026291832/article/details/73291525)
+[Kotlin-Android世界的一股清流-Package](http://www.jianshu.com/p/6ee027a5fe61)
 
-[Kotlin-Android世界的一股清流-基本数据类型与运算符](http://blog.csdn.net/qq1026291832/article/details/73326200)
+[Kotlin-Android世界的一股清流-基本数据类型与运算符](http://www.jianshu.com/p/39ba00c72827)
 
-[Kotlin-Android世界的一股清流-流程控制](http://blog.csdn.net/qq1026291832/article/details/73331528)
+[Kotlin-Android世界的一股清流-流程控制](http://www.jianshu.com/p/ea087dfb9de9)
 
-[Kotlin-Android世界的一股清流-函数](http://blog.csdn.net/qq1026291832/article/details/73472554)
+[Kotlin-Android世界的一股清流-函数](http://www.jianshu.com/p/bb82e9911f13)
 
-[Kotlin-Android世界的一股清流-Lambda表达式](http://blog.csdn.net/qq1026291832/article/details/73511138)
+[Kotlin-Android世界的一股清流-Lambda表达式](http://www.jianshu.com/p/014e17828079)
 
-[Kotlin-Android世界的一股清流-Class类](http://blog.csdn.net/qq1026291832/article/details/73608884)
+[Kotlin-Android世界的一股清流-Class类](http://www.jianshu.com/p/730bb545553b)
 
-[Kotlin-Android世界的一股清流-委托](http://blog.csdn.net/qq1026291832/article/details/73851105)
+[Kotlin-Android世界的一股清流-委托](http://www.jianshu.com/p/65d586c31704)
