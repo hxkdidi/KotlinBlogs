@@ -15,7 +15,6 @@ fun main(args: Array<String>) {
     val proxy = BaseProxy(BaseImpl())
     proxy.doSome()
 
-
     //委托属性
     val per = Person("Jake")
     println(per.name)

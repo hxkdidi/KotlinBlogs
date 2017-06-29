@@ -246,7 +246,8 @@ Kotlin支持标准的算数运算表达式，并且这些运算符被声明为�
 
 扩展函数，到函数里我们再进行讲解。
 
->现在，我们模拟坐标数据类型，并且支持同类型之间添加操作，添加操作结果为对应x,y累加，例如：
+
+现在，我们尝试模拟一种坐标的数据类型，并且支持同类型之间添加操作，添加操作结果为对应x,y累加，例如：
 
 	//伪代码
 	Point(1,2) add Point(2,2)  得到 Point（3，4）
@@ -275,7 +276,7 @@ Kotlin支持标准的算数运算表达式，并且这些运算符被声明为�
 	val point1 = Point(1, 2)
     val point2 = Point(2, 2)
     val result = point1.add(point2)
-    println(result)
+    println(result)  	//输出：Point(3,4)
 
 但是并不是我们想要的中缀运算符的形式，那我们还差什么？ **infix关键词**
 
@@ -284,7 +285,7 @@ Kotlin支持标准的算数运算表达式，并且这些运算符被声明为�
  	val point1 = Point(1, 2)
     val point2 = Point(2, 2)
     val result = point1 add point2
-    println(result)
+    println(result)		//输出：Point(3,4)
 
 到这里，中缀运算符的由来也就介绍完了，贴上Point完整代码，或者在博客头部的GitHub地址里下载最新源码
 
